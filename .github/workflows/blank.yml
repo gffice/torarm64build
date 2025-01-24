@@ -42,7 +42,6 @@ jobs:
       - name: Building
         run: |
             cd lyrebird
-            go get
             make build
       - name: 打包
         run: 7z a -mx=9 /mnt/mirror.7z ./
@@ -77,10 +76,12 @@ jobs:
       - name: Building
         run: |
             cd webtunnel
-            go get
+            
             cd main/client
+            go get
             go build
             cd ../server
+            go get
             go build
       - name: 打包
         run: 7z a -mx=9 /mnt/mirror.7z ./
@@ -115,10 +116,12 @@ jobs:
       - name: Building
         run: |
             cd snowflake
-            go get
+            
             cd client
+            go get
             go build
             cd ../server
+            go get
             go build
       - name: 打包
         run: 7z a -mx=9 /mnt/mirror.7z ./
