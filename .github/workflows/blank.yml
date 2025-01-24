@@ -33,6 +33,7 @@ jobs:
       # Runs a set of commands using the runners shell
       - name: 镜像仓库
         run: |
+          sudo chmod -R 777 /mnt
           echo ----------------
           git clone https://gitlab.torproject.org/tpo/anti-censorship/pluggable-transports/lyrebird.git
           #git clone https://gitlab.torproject.org/tpo/anti-censorship/pluggable-transports/webtunnel.git
@@ -67,6 +68,7 @@ jobs:
       # Runs a set of commands using the runners shell
       - name: 镜像仓库
         run: |
+          sudo chmod -R 777 /mnt
           echo ----------------
           #git clone https://gitlab.torproject.org/tpo/anti-censorship/pluggable-transports/lyrebird.git
           git clone https://gitlab.torproject.org/tpo/anti-censorship/pluggable-transports/webtunnel.git
@@ -107,6 +109,7 @@ jobs:
       # Runs a set of commands using the runners shell
       - name: 镜像仓库
         run: |
+          sudo chmod -R 777 /mnt
           echo ----------------
           #git clone https://gitlab.torproject.org/tpo/anti-censorship/pluggable-transports/lyrebird.git
           #git clone https://gitlab.torproject.org/tpo/anti-censorship/pluggable-transports/webtunnel.git
