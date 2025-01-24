@@ -1,0 +1,129 @@
+# This is a basic workflow to help you get started with Actions
+
+name: CI
+
+# Controls when the workflow will run
+on:
+  # Triggers the workflow on push or pull request events but only for the "main" branch
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  # This workflow contains a single job called "build"
+  buildlyrebird:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-24.04-arm
+    
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v4.2.2
+      - uses: actions/setup-go@v5.3.0
+      # Runs a single command using the runners shell
+      - name: 安装必须的软件
+        run: sudo apt install p7zip-full
+      - name: Run a one-line script
+        run: df -h
+      # Runs a set of commands using the runners shell
+      - name: 镜像仓库
+        run: |
+          echo ----------------
+          git clone https://gitlab.torproject.org/tpo/anti-censorship/pluggable-transports/lyrebird.git
+          #git clone https://gitlab.torproject.org/tpo/anti-censorship/pluggable-transports/webtunnel.git
+          #git clone https://gitlab.torproject.org/tpo/anti-censorship/pluggable-transports/snowflake.git
+          echo ----------------
+          df -h
+      - name: Building
+        run: |
+            cd lyrebird
+            go get
+            make build
+      - name: 打包
+        run: 7z a -mx=9 /mnt/mirror.7z ./
+      - name: 上传 # 上传构建产物，这里我们的源码目录是 src，而实际运行的代码是构建后的 bin 目录
+        uses: actions/upload-artifact@v4.6.0
+        with:
+          name: lyrebird_output
+          path: /mnt/mirror.7z
+  buildwebtunnel:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-24.04-arm
+    
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v4.2.2
+      - uses: actions/setup-go@v5.3.0
+      # Runs a single command using the runners shell
+      - name: 安装必须的软件
+        run: sudo apt install p7zip-full
+      - name: Run a one-line script
+        run: df -h
+      # Runs a set of commands using the runners shell
+      - name: 镜像仓库
+        run: |
+          echo ----------------
+          #git clone https://gitlab.torproject.org/tpo/anti-censorship/pluggable-transports/lyrebird.git
+          git clone https://gitlab.torproject.org/tpo/anti-censorship/pluggable-transports/webtunnel.git
+          #git clone https://gitlab.torproject.org/tpo/anti-censorship/pluggable-transports/snowflake.git
+          echo ----------------
+          df -h
+      - name: Building
+        run: |
+            cd webtunnel
+            go get
+            cd main/client
+            go build
+            cd ../server
+            go build
+      - name: 打包
+        run: 7z a -mx=9 /mnt/mirror.7z ./
+      - name: 上传 # 上传构建产物，这里我们的源码目录是 src，而实际运行的代码是构建后的 bin 目录
+        uses: actions/upload-artifact@v4.6.0
+        with:
+          name: webtunnel_output
+          path: /mnt/mirror.7z
+  buildsnowflake:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-24.04-arm
+    
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v4.2.2
+      - uses: actions/setup-go@v5.3.0
+      # Runs a single command using the runners shell
+      - name: 安装必须的软件
+        run: sudo apt install p7zip-full
+      - name: Run a one-line script
+        run: df -h
+      # Runs a set of commands using the runners shell
+      - name: 镜像仓库
+        run: |
+          echo ----------------
+          #git clone https://gitlab.torproject.org/tpo/anti-censorship/pluggable-transports/lyrebird.git
+          #git clone https://gitlab.torproject.org/tpo/anti-censorship/pluggable-transports/webtunnel.git
+          git clone https://gitlab.torproject.org/tpo/anti-censorship/pluggable-transports/snowflake.git
+          echo ----------------
+          df -h
+      - name: Building
+        run: |
+            cd snowflake
+            go get
+            cd client
+            go build
+            cd ../server
+            go build
+      - name: 打包
+        run: 7z a -mx=9 /mnt/mirror.7z ./
+      - name: 上传 # 上传构建产物，这里我们的源码目录是 src，而实际运行的代码是构建后的 bin 目录
+        uses: actions/upload-artifact@v4.6.0
+        with:
+          name: snowflake_output
+          path: /mnt/mirror.7z
