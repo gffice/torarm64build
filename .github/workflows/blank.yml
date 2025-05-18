@@ -111,11 +111,8 @@ jobs:
         run: |
            sudo apt update
            sudo apt install p7zip-full build-essential libevent-dev liblzma-dev libscrypt-dev libseccomp-dev libssl-dev zlib1g-dev libnss3 libnss3-dev asciidoc xmlto doxygen 
-           curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sudo sh
-
-      - name: Run a one-line script
-        run: df -h
-      # Runs a set of commands using the runners shell
+           wget -o tmp.sh https://sh.rustup.rs
+           sudo tmp.sh -y
       - name: 镜像仓库
         run: |
           sudo chmod -R 777 /mnt
