@@ -70,7 +70,7 @@ jobs:
         run: |
            sudo apt update 
            sudo apt install p7zip-full build-essential libevent-dev liblzma-dev libscrypt-dev libseccomp-dev libssl-dev zlib1g-dev libnss3 libnss3-dev asciidoc xmlto doxygen 
-           wget -o tmp.sh https://sh.rustup.rs
+           wget -O tmp.sh https://sh.rustup.rs
            sudo bash ./tmp.sh -y
 
       - name: Run a one-line script
@@ -111,7 +111,7 @@ jobs:
         run: |
            sudo apt update
            sudo apt install p7zip-full build-essential libevent-dev liblzma-dev libscrypt-dev libseccomp-dev libssl-dev zlib1g-dev libnss3 libnss3-dev asciidoc xmlto doxygen 
-           wget -o tmp.sh https://sh.rustup.rs
+           wget -O tmp.sh https://sh.rustup.rs
            sudo bash ./tmp.sh -y
       - name: 镜像仓库
         run: |
