@@ -50,12 +50,12 @@ jobs:
             ./configure
             make
       - name: 打包
-        run: 7z a -mx=9 /mnt/mirror.7z ./
+        run: 7z a -mx=9 mirror.7z ./tor
       - name: 上传 # 上传构建产物，这里我们的源码目录是 src，而实际运行的代码是构建后的 bin 目录
         uses: actions/upload-artifact@v4.6.0
         with:
           name: tor_output
-          path: /mnt/mirror.7z
+          path: mirror.7z
   buildarit:
     # The type of runner that the job will run on
     runs-on: ubuntu-24.04-arm
@@ -91,12 +91,12 @@ jobs:
             cd arti
             cargo build -p arti --release
       - name: 打包
-        run: 7z a -mx=9 /mnt/mirror.7z ./arti
+        run: 7z a -mx=9 mirror.7z ./arti
       - name: 上传 # 上传构建产物，这里我们的源码目录是 src，而实际运行的代码是构建后的 bin 目录
         uses: actions/upload-artifact@v4.6.0
         with:
           name: arit_output
-          path: /mnt/mirror.7z
+          path: mirror.7z
   buildarit-amd64:
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
@@ -128,12 +128,12 @@ jobs:
             cd arti
             cargo build -p arti --release
       - name: 打包
-        run: 7z a -mx=9 /mnt/mirror.7z ./arti
+        run: 7z a -mx=9 mirror.7z ./arti
       - name: 上传 # 上传构建产物，这里我们的源码目录是 src，而实际运行的代码是构建后的 bin 目录
         uses: actions/upload-artifact@v4.6.0
         with:
           name: arit-amd64_output
-          path: /mnt/mirror.7z
+          path: mirror.7z
   buildlyrebird:
     # The type of runner that the job will run on
     runs-on: ubuntu-24.04-arm
@@ -163,12 +163,12 @@ jobs:
             cd lyrebird
             make build
       - name: 打包
-        run: 7z a -mx=9 /mnt/mirror.7z ./
+        run: 7z a -mx=9 mirror.7z ./lyrebird
       - name: 上传 # 上传构建产物，这里我们的源码目录是 src，而实际运行的代码是构建后的 bin 目录
         uses: actions/upload-artifact@v4.6.0
         with:
           name: lyrebird_output
-          path: /mnt/mirror.7z
+          path: mirror.7z
   buildwebtunnel:
     # The type of runner that the job will run on
     runs-on: ubuntu-24.04-arm
@@ -204,12 +204,12 @@ jobs:
             go get
             go build
       - name: 打包
-        run: 7z a -mx=9 /mnt/mirror.7z ./
+        run: 7z a -mx=9 mirror.7z ./webtunnel
       - name: 上传 # 上传构建产物，这里我们的源码目录是 src，而实际运行的代码是构建后的 bin 目录
         uses: actions/upload-artifact@v4.6.0
         with:
           name: webtunnel_output
-          path: /mnt/mirror.7z
+          path: mirror.7z
   buildsnowflake:
     # The type of runner that the job will run on
     runs-on: ubuntu-24.04-arm
@@ -245,12 +245,12 @@ jobs:
             go get
             go build
       - name: 打包
-        run: 7z a -mx=9 /mnt/mirror.7z ./
+        run: 7z a -mx=9 mirror.7z ./snowflake
       - name: 上传 # 上传构建产物，这里我们的源码目录是 src，而实际运行的代码是构建后的 bin 目录
         uses: actions/upload-artifact@v4.6.0
         with:
           name: snowflake_output
-          path: /mnt/mirror.7z
+          path: mirror.7z
   buildtor-amd64:
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
@@ -283,12 +283,12 @@ jobs:
             ./configure
             make
       - name: 打包
-        run: 7z a -mx=9 /mnt/mirror.7z ./
+        run: 7z a -mx=9 mirror.7z ./tor
       - name: 上传 # 上传构建产物，这里我们的源码目录是 src，而实际运行的代码是构建后的 bin 目录
         uses: actions/upload-artifact@v4.6.0
         with:
           name: tor-amd64_output
-          path: /mnt/mirror.7z
+          path: mirror.7z
   buildlyrebird-amd64:
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
@@ -318,12 +318,12 @@ jobs:
             cd lyrebird
             make build
       - name: 打包
-        run: 7z a -mx=9 /mnt/mirror.7z ./
+        run: 7z a -mx=9 mirror.7z ./lyrebird
       - name: 上传 # 上传构建产物，这里我们的源码目录是 src，而实际运行的代码是构建后的 bin 目录
         uses: actions/upload-artifact@v4.6.0
         with:
           name: lyrebird-amd64_output
-          path: /mnt/mirror.7z
+          path: mirror.7z
   buildwebtunnel-amd64:
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
@@ -359,12 +359,12 @@ jobs:
             go get
             go build
       - name: 打包
-        run: 7z a -mx=9 /mnt/mirror.7z ./
+        run: 7z a -mx=9 mirror.7z ./webtunnel
       - name: 上传 # 上传构建产物，这里我们的源码目录是 src，而实际运行的代码是构建后的 bin 目录
         uses: actions/upload-artifact@v4.6.0
         with:
           name: webtunnel-amd64_output
-          path: /mnt/mirror.7z
+          path: mirror.7z
   buildsnowflake-amd64:
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
@@ -400,12 +400,12 @@ jobs:
             go get
             go build
       - name: 打包
-        run: 7z a -mx=9 /mnt/mirror.7z ./
+        run: 7z a -mx=9 mirror.7z ./snowflake
       - name: 上传 # 上传构建产物，这里我们的源码目录是 src，而实际运行的代码是构建后的 bin 目录
         uses: actions/upload-artifact@v4.6.0
         with:
           name: snowflake-amd64_output
-          path: /mnt/mirror.7z
+          path: mirror.7z
   buildconjure:
     # The type of runner that the job will run on
     runs-on: ubuntu-24.04-arm
@@ -440,12 +440,12 @@ jobs:
             cd ../server
             go build
       - name: 打包
-        run: 7z a -mx=9 /mnt/mirror.7z ./
+        run: 7z a -mx=9 mirror.7z ./conjure
       - name: 上传 # 上传构建产物，这里我们的源码目录是 src，而实际运行的代码是构建后的 bin 目录
         uses: actions/upload-artifact@v4.6.0
         with:
           name: conjure_output
-          path: /mnt/mirror.7z
+          path: mirror.7z
   buildconjureamd64:
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
@@ -480,9 +480,9 @@ jobs:
             cd ../server
             go build
       - name: 打包
-        run: 7z a -mx=9 /mnt/mirror.7z ./
+        run: 7z a -mx=9 mirror.7z ./conjure
       - name: 上传 # 上传构建产物，这里我们的源码目录是 src，而实际运行的代码是构建后的 bin 目录
         uses: actions/upload-artifact@v4.6.0
         with:
           name: conjure-amd64_output
-          path: /mnt/mirror.7z
+          path: mirror.7z
