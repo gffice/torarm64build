@@ -24,7 +24,7 @@ jobs:
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v4.2.2
-      - uses: actions/setup-go@v5.3.0
+      - uses: actions/setup-go@v5.5.0
       # Runs a single command using the runners shell
       - name: 安装必须的软件
         run: |
@@ -52,7 +52,7 @@ jobs:
       - name: 打包
         run: 7z a -mx=9 mirror.7z ./tor
       - name: 上传 # 上传构建产物，这里我们的源码目录是 src，而实际运行的代码是构建后的 bin 目录
-        uses: actions/upload-artifact@v4.6.0
+        uses: actions/upload-artifact@v4.6.2
         with:
           name: tor_output
           path: mirror.7z
@@ -64,7 +64,7 @@ jobs:
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v4.2.2
-      - uses: actions/setup-go@v5.3.0
+      - uses: actions/setup-go@v5.5.0
       # Runs a single command using the runners shell
       - name: 安装必须的软件
         run: |
@@ -90,13 +90,13 @@ jobs:
         run: |
             cd arti
             cargo build -p arti --release
-      - name: 打包
-        run: 7z a -mx=9 mirror.7z ./arti
+      #- name: 打包
+        #run: 7z a -mx=9 mirror.7z ./arti
       - name: 上传 # 上传构建产物，这里我们的源码目录是 src，而实际运行的代码是构建后的 bin 目录
-        uses: actions/upload-artifact@v4.6.0
+        uses: actions/upload-artifact@v4.6.2
         with:
           name: arit_output
-          path: mirror.7z
+          path: arti
   buildarit-amd64:
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
@@ -105,7 +105,7 @@ jobs:
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v4.2.2
-      - uses: actions/setup-go@v5.3.0
+      - uses: actions/setup-go@v5.5.0
       # Runs a single command using the runners shell
       - name: 安装必须的软件
         run: |
@@ -127,13 +127,13 @@ jobs:
         run: |
             cd arti
             cargo build -p arti --release
-      - name: 打包
-        run: 7z a -mx=9 mirror.7z ./arti
+      #- name: 打包
+        #run: 7z a -mx=9 mirror.7z ./arti
       - name: 上传 # 上传构建产物，这里我们的源码目录是 src，而实际运行的代码是构建后的 bin 目录
-        uses: actions/upload-artifact@v4.6.0
+        uses: actions/upload-artifact@v4.6.2
         with:
           name: arit-amd64_output
-          path: mirror.7z
+          path: arti
   buildlyrebird:
     # The type of runner that the job will run on
     runs-on: ubuntu-24.04-arm
@@ -142,7 +142,7 @@ jobs:
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v4.2.2
-      - uses: actions/setup-go@v5.3.0
+      - uses: actions/setup-go@v5.5.0
       # Runs a single command using the runners shell
       - name: 安装必须的软件
         run: sudo apt install p7zip-full
@@ -165,7 +165,7 @@ jobs:
       - name: 打包
         run: 7z a -mx=9 mirror.7z ./lyrebird
       - name: 上传 # 上传构建产物，这里我们的源码目录是 src，而实际运行的代码是构建后的 bin 目录
-        uses: actions/upload-artifact@v4.6.0
+        uses: actions/upload-artifact@v4.6.2
         with:
           name: lyrebird_output
           path: mirror.7z
@@ -177,7 +177,7 @@ jobs:
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v4.2.2
-      - uses: actions/setup-go@v5.3.0
+      - uses: actions/setup-go@v5.5.0
       # Runs a single command using the runners shell
       - name: 安装必须的软件
         run: sudo apt install p7zip-full
@@ -206,7 +206,7 @@ jobs:
       - name: 打包
         run: 7z a -mx=9 mirror.7z ./webtunnel
       - name: 上传 # 上传构建产物，这里我们的源码目录是 src，而实际运行的代码是构建后的 bin 目录
-        uses: actions/upload-artifact@v4.6.0
+        uses: actions/upload-artifact@v4.6.2
         with:
           name: webtunnel_output
           path: mirror.7z
@@ -218,7 +218,7 @@ jobs:
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v4.2.2
-      - uses: actions/setup-go@v5.3.0
+      - uses: actions/setup-go@v5.5.0
       # Runs a single command using the runners shell
       - name: 安装必须的软件
         run: sudo apt install p7zip-full
@@ -247,7 +247,7 @@ jobs:
       - name: 打包
         run: 7z a -mx=9 mirror.7z ./snowflake
       - name: 上传 # 上传构建产物，这里我们的源码目录是 src，而实际运行的代码是构建后的 bin 目录
-        uses: actions/upload-artifact@v4.6.0
+        uses: actions/upload-artifact@v4.6.2
         with:
           name: snowflake_output
           path: mirror.7z
@@ -259,7 +259,7 @@ jobs:
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v4.2.2
-      - uses: actions/setup-go@v5.3.0
+      - uses: actions/setup-go@v5.5.0
       # Runs a single command using the runners shell
       - name: 安装必须的软件
         run: sudo apt install p7zip-full build-essential libevent-dev liblzma-dev libscrypt-dev libseccomp-dev libssl-dev zlib1g-dev libnss3 libnss3-dev asciidoc xmlto doxygen
@@ -285,7 +285,7 @@ jobs:
       - name: 打包
         run: 7z a -mx=9 mirror.7z ./tor
       - name: 上传 # 上传构建产物，这里我们的源码目录是 src，而实际运行的代码是构建后的 bin 目录
-        uses: actions/upload-artifact@v4.6.0
+        uses: actions/upload-artifact@v4.6.2
         with:
           name: tor-amd64_output
           path: mirror.7z
@@ -297,7 +297,7 @@ jobs:
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v4.2.2
-      - uses: actions/setup-go@v5.3.0
+      - uses: actions/setup-go@v5.5.0
       # Runs a single command using the runners shell
       - name: 安装必须的软件
         run: sudo apt install p7zip-full
@@ -320,7 +320,7 @@ jobs:
       - name: 打包
         run: 7z a -mx=9 mirror.7z ./lyrebird
       - name: 上传 # 上传构建产物，这里我们的源码目录是 src，而实际运行的代码是构建后的 bin 目录
-        uses: actions/upload-artifact@v4.6.0
+        uses: actions/upload-artifact@v4.6.2
         with:
           name: lyrebird-amd64_output
           path: mirror.7z
@@ -332,7 +332,7 @@ jobs:
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v4.2.2
-      - uses: actions/setup-go@v5.3.0
+      - uses: actions/setup-go@v5.5.0
       # Runs a single command using the runners shell
       - name: 安装必须的软件
         run: sudo apt install p7zip-full
@@ -361,7 +361,7 @@ jobs:
       - name: 打包
         run: 7z a -mx=9 mirror.7z ./webtunnel
       - name: 上传 # 上传构建产物，这里我们的源码目录是 src，而实际运行的代码是构建后的 bin 目录
-        uses: actions/upload-artifact@v4.6.0
+        uses: actions/upload-artifact@v4.6.2
         with:
           name: webtunnel-amd64_output
           path: mirror.7z
@@ -373,7 +373,7 @@ jobs:
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v4.2.2
-      - uses: actions/setup-go@v5.3.0
+      - uses: actions/setup-go@v5.5.0
       # Runs a single command using the runners shell
       - name: 安装必须的软件
         run: sudo apt install p7zip-full
@@ -402,7 +402,7 @@ jobs:
       - name: 打包
         run: 7z a -mx=9 mirror.7z ./snowflake
       - name: 上传 # 上传构建产物，这里我们的源码目录是 src，而实际运行的代码是构建后的 bin 目录
-        uses: actions/upload-artifact@v4.6.0
+        uses: actions/upload-artifact@v4.6.2
         with:
           name: snowflake-amd64_output
           path: mirror.7z
@@ -414,7 +414,7 @@ jobs:
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v4.2.2
-      - uses: actions/setup-go@v5.3.0
+      - uses: actions/setup-go@v5.5.0
       # Runs a single command using the runners shell
       - name: 安装必须的软件
         run: sudo apt update && sudo apt install p7zip-full libczmq-dev
@@ -442,7 +442,7 @@ jobs:
       - name: 打包
         run: 7z a -mx=9 mirror.7z ./conjure
       - name: 上传 # 上传构建产物，这里我们的源码目录是 src，而实际运行的代码是构建后的 bin 目录
-        uses: actions/upload-artifact@v4.6.0
+        uses: actions/upload-artifact@v4.6.2
         with:
           name: conjure_output
           path: mirror.7z
@@ -454,7 +454,7 @@ jobs:
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v4.2.2
-      - uses: actions/setup-go@v5.3.0
+      - uses: actions/setup-go@v5.5.0
       # Runs a single command using the runners shell
       - name: 安装必须的软件
         run: sudo apt update && sudo apt install p7zip-full libczmq-dev
@@ -482,7 +482,7 @@ jobs:
       - name: 打包
         run: 7z a -mx=9 mirror.7z ./conjure
       - name: 上传 # 上传构建产物，这里我们的源码目录是 src，而实际运行的代码是构建后的 bin 目录
-        uses: actions/upload-artifact@v4.6.0
+        uses: actions/upload-artifact@v4.6.2
         with:
           name: conjure-amd64_output
           path: mirror.7z
