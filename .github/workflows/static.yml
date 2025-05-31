@@ -79,8 +79,8 @@ jobs:
         run: |
             mkdir httproot
             #mv bin.7z
-            mv bin.tar.xz httproot/bin-amd64.tar.xz
-            md5sum httproot/bin.tar.xz >httproot/v.txt
+            mv ./bin.tar.xz ./httproot/bin-amd64.tar.xz
+            md5sum httproot/bin-amd64.tar.xz >httproot/v.txt
       - name: Setup Pages
         uses: actions/configure-pages@v5
 
