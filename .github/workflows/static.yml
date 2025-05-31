@@ -70,8 +70,8 @@ jobs:
             cp ./lyrebird/lyrebird appbin/lyrebird
             cp ./webtunnel/main/client/client appbin/webtunnel
             cp ./snowflake/client/client appbin/snowflake
-            md5sum appbin/lyrebird appbin/webtunnel appbin/snowflake >md5
-            cp ./md5 appbin
+            cd appbin
+            md5sum lyrebird webtunnel snowflake >md5
       - name: 打包 
         #run: 7z a -mx=9 bin.7z ./appbin/*
         run: tar -cJvf bin.tar.xz ./appbin/*
