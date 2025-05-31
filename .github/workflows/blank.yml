@@ -51,11 +51,19 @@ jobs:
             make
       - name: 打包
         run: 7z a -mx=9 mirror.7z ./tor
-      - name: 上传 # 上传构建产物，这里我们的源码目录是 src，而实际运行的代码是构建后的 bin 目录
-        uses: actions/upload-artifact@v4.6.2
+      #- name: 上传 # 上传构建产物，这里我们的源码目录是 src，而实际运行的代码是构建后的 bin 目录
+        #uses: actions/upload-artifact@v4.6.2
+        #with:
+          #name: tor_output
+          #path: mirror.7z
+      - name: Upload to Release
+        uses: softprops/action-gh-release@v2.2.2
         with:
-          name: tor_output
-          path: mirror.7z
+          files: mirror.7z
+          name: Tor Arm64 Build Release
+          tag_name: ${{ github.run_id }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
   buildarit:
     # The type of runner that the job will run on
     runs-on: ubuntu-24.04-arm
@@ -164,11 +172,16 @@ jobs:
             make build
       - name: 打包
         run: 7z a -mx=9 mirror.7z ./lyrebird
-      - name: 上传 # 上传构建产物，这里我们的源码目录是 src，而实际运行的代码是构建后的 bin 目录
-        uses: actions/upload-artifact@v4.6.2
+      - name: Upload to Release
+        uses: softprops/action-gh-release@v2.2.2
         with:
-          name: lyrebird_output
-          path: mirror.7z
+          files: |
+             mirror.7z
+             ./lyrebird/lyrebird
+          name: lyrebird Arm64 Build Release
+          tag_name: ${{ github.run_id }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
   buildwebtunnel:
     # The type of runner that the job will run on
     runs-on: ubuntu-24.04-arm
@@ -205,11 +218,16 @@ jobs:
             go build
       - name: 打包
         run: 7z a -mx=9 mirror.7z ./webtunnel
-      - name: 上传 # 上传构建产物，这里我们的源码目录是 src，而实际运行的代码是构建后的 bin 目录
-        uses: actions/upload-artifact@v4.6.2
+      - name: Upload to Release
+        uses: softprops/action-gh-release@v2.2.2
         with:
-          name: webtunnel_output
-          path: mirror.7z
+          files: |
+             mirror.7z
+             ./webtunnel/main/client/client
+          name: webtunnel Arm64 Build Release
+          tag_name: ${{ github.run_id }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
   buildsnowflake:
     # The type of runner that the job will run on
     runs-on: ubuntu-24.04-arm
@@ -246,11 +264,16 @@ jobs:
             go build
       - name: 打包
         run: 7z a -mx=9 mirror.7z ./snowflake
-      - name: 上传 # 上传构建产物，这里我们的源码目录是 src，而实际运行的代码是构建后的 bin 目录
-        uses: actions/upload-artifact@v4.6.2
+      - name: Upload to Release
+        uses: softprops/action-gh-release@v2.2.2
         with:
-          name: snowflake_output
-          path: mirror.7z
+          files: |
+             mirror.7z
+             ./snowflake/client/client
+          name: snowflake Arm64 Build Release
+          tag_name: ${{ github.run_id }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
   buildtor-amd64:
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
@@ -319,11 +342,16 @@ jobs:
             make build
       - name: 打包
         run: 7z a -mx=9 mirror.7z ./lyrebird
-      - name: 上传 # 上传构建产物，这里我们的源码目录是 src，而实际运行的代码是构建后的 bin 目录
-        uses: actions/upload-artifact@v4.6.2
+      - name: Upload to Release
+        uses: softprops/action-gh-release@v2.2.2
         with:
-          name: lyrebird-amd64_output
-          path: mirror.7z
+          files: |
+             mirror.7z
+             ./lyrebird/lyrebird
+          name: lyrebird amd64 Build Release
+          tag_name: ${{ github.run_id }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
   buildwebtunnel-amd64:
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
@@ -360,11 +388,16 @@ jobs:
             go build
       - name: 打包
         run: 7z a -mx=9 mirror.7z ./webtunnel
-      - name: 上传 # 上传构建产物，这里我们的源码目录是 src，而实际运行的代码是构建后的 bin 目录
-        uses: actions/upload-artifact@v4.6.2
+      - name: Upload to Release
+        uses: softprops/action-gh-release@v2.2.2
         with:
-          name: webtunnel-amd64_output
-          path: mirror.7z
+          files: |
+             mirror.7z
+             ./webtunnel/main/client/client
+          name: webtunnel amd64 Build Release
+          tag_name: ${{ github.run_id }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
   buildsnowflake-amd64:
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
@@ -401,11 +434,16 @@ jobs:
             go build
       - name: 打包
         run: 7z a -mx=9 mirror.7z ./snowflake
-      - name: 上传 # 上传构建产物，这里我们的源码目录是 src，而实际运行的代码是构建后的 bin 目录
-        uses: actions/upload-artifact@v4.6.2
+      - name: Upload to Release
+        uses: softprops/action-gh-release@v2.2.2
         with:
-          name: snowflake-amd64_output
-          path: mirror.7z
+          files: |
+             mirror.7z
+             ./snowflake/client/client
+          name: snowflake amd64 Build Release
+          tag_name: ${{ github.run_id }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
   buildconjure:
     # The type of runner that the job will run on
     runs-on: ubuntu-24.04-arm
