@@ -5,7 +5,9 @@ on:
   # Runs on pushes targeting the default branch
   push:
     branches: ["main"]
-
+  schedule:
+  # 每天的5点运行一次任务
+  - cron: '0 21 * * *'
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
