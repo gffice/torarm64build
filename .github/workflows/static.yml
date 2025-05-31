@@ -1,0 +1,95 @@
+# Simple workflow for deploying static content to GitHub Pages
+name: Deploy static content to Pages
+
+on:
+  # Runs on pushes targeting the default branch
+  push:
+    branches: ["main"]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+# Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Allow only one concurrent deployment, skipping runs queued between the run in-progress and latest queued.
+# However, do NOT cancel in-progress runs as we want to allow these production deployments to complete.
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+jobs:
+  buildall-amd64:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4.2.2
+      - uses: actions/setup-go@v5.5.0
+      - name: 安装必须的软件
+        run: |
+          #sudo apt install p7zip-full
+          sudo apt install xz-utils tar -y
+      - name: 镜像仓库
+        run: |
+          sudo chmod -R 777 /mnt
+          echo ----------------
+          git clone https://gitlab.torproject.org/tpo/anti-censorship/pluggable-transports/lyrebird.git
+          git clone https://gitlab.torproject.org/tpo/anti-censorship/pluggable-transports/webtunnel.git
+          git clone https://gitlab.torproject.org/tpo/anti-censorship/pluggable-transports/snowflake.git
+          echo ----------------
+          df -h
+      - name: Building lyrebird
+        run: |
+            cd lyrebird
+            make build
+      - name: Building webtunnel
+        run: |
+            cd webtunnel
+            cd main/client
+            go get
+            go build
+            cd ../server
+            go get
+            go build
+      - name: Building snowflake
+        run: |
+            cd snowflake
+            cd client
+            go get
+            go build
+            cd ../server
+            go get
+            go build
+      - name: copy
+        run: |
+            mkdir appbin
+            cp ./lyrebird/lyrebird appbin/lyrebird
+            cp ./webtunnel/main/client/client appbin/webtunnel
+            cp ./snowflake/client/client appbin/snowflake
+            md5sum appbin/lyrebird appbin/webtunnel appbin/snowflake >md5
+            cp ./md5 appbin
+      - name: 打包 
+        #run: 7z a -mx=9 bin.7z ./appbin/*
+        run: tar -cJvf bin.tar.xz ./appbin/*
+      - name: httproot
+        run: |
+            mkdir httproot
+            #mv bin.7z
+            mv bin.tar.xz httproot/bin-amd64.tar.xz
+            md5sum httproot/bin.tar.xz >httproot/v.txt
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          # Upload entire repository
+          path: 'httproot'
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
