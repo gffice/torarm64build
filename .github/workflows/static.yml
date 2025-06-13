@@ -42,6 +42,7 @@ jobs:
           git clone https://gitlab.torproject.org/tpo/anti-censorship/pluggable-transports/lyrebird.git
           git clone https://gitlab.torproject.org/tpo/anti-censorship/pluggable-transports/webtunnel.git
           git clone https://gitlab.torproject.org/tpo/anti-censorship/pluggable-transports/snowflake.git
+          git clone https://gitlab.torproject.org/tpo/anti-censorship/pluggable-transports/conjure.git
           echo ----------------
           df -h
       - name: Building lyrebird
@@ -63,7 +64,10 @@ jobs:
             cd client
             go get
             go build
-            cd ../server
+      - name: Building conjure
+        run: |
+            cd conjure
+            cd client
             go get
             go build
       - name: copy
@@ -72,8 +76,9 @@ jobs:
             cp ./lyrebird/lyrebird appbin/lyrebird
             cp ./webtunnel/main/client/client appbin/webtunnel
             cp ./snowflake/client/client appbin/snowflake
+            cp ./conjure/client/client appbin/conjure
             cd appbin
-            md5sum lyrebird webtunnel snowflake >md5
+            md5sum lyrebird webtunnel snowflake conjure >md5
       - name: 打包 
         #run: 7z a -mx=9 bin.7z ./appbin/*
         run: tar -cJvf bin.tar.xz ./appbin/*
