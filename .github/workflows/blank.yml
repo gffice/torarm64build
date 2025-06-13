@@ -179,7 +179,7 @@ jobs:
              mirror.7z
              ./lyrebird/lyrebird
           name: lyrebird Arm64 Build Release
-          tag_name: ${{ github.run_id }}
+          tag_name: ${{ github.run_id }}lyrebirdarm64
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
   buildwebtunnel:
@@ -217,15 +217,17 @@ jobs:
             go get
             go build
       - name: 打包
-        run: 7z a -mx=9 mirror.7z ./webtunnel
+        run: |
+          7z a -mx=9 mirror.7z ./webtunnel
+          cp ./webtunnel/main/client/client ./webtunnel/main/client/webtunnel
       - name: Upload to Release
         uses: softprops/action-gh-release@v2.2.2
         with:
           files: |
              mirror.7z
-             ./webtunnel/main/client/client
+             ./webtunnel/main/client/webtunnel
           name: webtunnel Arm64 Build Release
-          tag_name: ${{ github.run_id }}
+          tag_name: ${{ github.run_id }}/webtunnelarm64
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
   buildsnowflake:
@@ -263,15 +265,17 @@ jobs:
             go get
             go build
       - name: 打包
-        run: 7z a -mx=9 mirror.7z ./snowflake
+        run: |
+          7z a -mx=9 mirror.7z ./snowflake
+          cp ./snowflake/client/client ./snowflake/client/snowflake
       - name: Upload to Release
         uses: softprops/action-gh-release@v2.2.2
         with:
           files: |
              mirror.7z
-             ./snowflake/client/client
+             ./snowflake/client/snowflake
           name: snowflake Arm64 Build Release
-          tag_name: ${{ github.run_id }}
+          tag_name: ${{ github.run_id }}snowflakearm64
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
   buildtor-amd64:
@@ -349,7 +353,7 @@ jobs:
              mirror.7z
              ./lyrebird/lyrebird
           name: lyrebird amd64 Build Release
-          tag_name: ${{ github.run_id }}
+          tag_name: ${{ github.run_id }}lyrebirdamd64
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
   buildwebtunnel-amd64:
@@ -387,7 +391,9 @@ jobs:
             go get
             go build
       - name: 打包
-        run: 7z a -mx=9 mirror.7z ./webtunnel
+        run: |
+          7z a -mx=9 mirror.7z ./webtunnel
+          cp ./webtunnel/main/client/client ./webtunnel/main/client/webtunnel
       - name: Upload to Release
         uses: softprops/action-gh-release@v2.2.2
         with:
@@ -395,7 +401,7 @@ jobs:
              mirror.7z
              ./webtunnel/main/client/client
           name: webtunnel amd64 Build Release
-          tag_name: ${{ github.run_id }}
+          tag_name: ${{ github.run_id }}webtunnelamd64
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
   buildsnowflake-amd64:
@@ -433,15 +439,17 @@ jobs:
             go get
             go build
       - name: 打包
-        run: 7z a -mx=9 mirror.7z ./snowflake
+        run: |
+          7z a -mx=9 mirror.7z ./snowflake
+          cp ./snowflake/client/client ./snowflake/client/snowflake
       - name: Upload to Release
         uses: softprops/action-gh-release@v2.2.2
         with:
           files: |
              mirror.7z
-             ./snowflake/client/client
+             ./snowflake/client/snowflake
           name: snowflake amd64 Build Release
-          tag_name: ${{ github.run_id }}
+          tag_name: ${{ github.run_id }}snowflakeamd64
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
   buildconjure:
