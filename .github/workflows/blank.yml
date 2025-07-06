@@ -60,7 +60,7 @@ jobs:
         uses: softprops/action-gh-release@v2.2.2
         with:
           files: mirror.7z
-          name: Tor Arm64 Build Release
+          name: Tor Arm64 Build Release ${{ github.run_started_at }}
           tag_name: ${{ github.run_id }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
